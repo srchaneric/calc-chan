@@ -18,7 +18,7 @@ jobs:
           npm install
           npm run build
 
-           - name: Enviar via FTP
+      - name: Enviar via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -26,4 +26,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: calc/  # <--- APENAS ISSO!
+
 
