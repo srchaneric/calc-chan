@@ -5,10 +5,21 @@ import { defineConfig, loadEnv } from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: './', // Isso corrige o erro de página em branco no subdomínio
+    // Ajustado para o caminho absoluto do seu subdomínio na Hostinger
+    base: '/calc/', 
     plugins: [react()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    build: {
+      // Garante que o CSS e JS sejam gerados com nomes fixos para evitar erro 404 de cache
+      rollupOptions: {
+        output: {
+          entryFileNames: `assets/[name].js`,
+          chunkFileNames: `assets/[name].js`,
+          assetFileNames: `assets/[name].[ext]`
+        }
+      }
     },
     resolve: {
       alias: {
