@@ -18,12 +18,12 @@ jobs:
           npm install
           npm run build
 
-      - name: Enviar via FTP
+          - name: Enviar via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: /domains/chandigital.com.br/public_html/calc/
+          server-dir: domains/chandigital.com.br/public_html/calc/
 
