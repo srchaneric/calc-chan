@@ -25,5 +25,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ./calc/  # <--- Use o ponto e a barra assim
-
+          server-dir: ./  # O ponto significa "descarregue aqui mesmo"
