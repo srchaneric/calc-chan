@@ -1,18 +1,22 @@
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite'; // Importação correta para v4
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // Ajustado para o caminho absoluto do seu subdomínio na Hostinger
+    // Caminho para o seu subdomínio na Hostinger
     base: '/calc/', 
-    plugins: [react()],
+    plugins: [
+      react(),
+      tailwindcss(), // Ativa o Tailwind v4 no processo de build
+    ],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
     build: {
-      // Garante que o CSS e JS sejam gerados com nomes fixos para evitar erro 404 de cache
+      // Evita problemas de cache com nomes fixos
       rollupOptions: {
         output: {
           entryFileNames: `assets/[name].js`,
@@ -27,7 +31,6 @@ export default defineConfig(({mode}) => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
   };
